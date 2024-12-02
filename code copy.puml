@@ -1,0 +1,97 @@
+@startuml
+
+' Adjusting skin parameters for better visibility
+skinparam rectangle {
+   
+    FontSize 14
+}
+
+skinparam component {
+    
+    FontSize 14
+}
+
+skinparam package {
+    
+    FontSize 14
+}
+
+skinparam node {
+    
+    FontSize 14
+}
+
+skinparam defaultFontName Arial
+
+top to bottom direction
+
+package "MediConnect Architecture" {
+
+  rectangle "User Interface Layer" as UILayer {
+      [Patients]
+      [Doctors]
+      [Donors]
+      [Admins]
+      [Health-related posts and tips]
+  }
+
+  rectangle "Application Layer" as AppLayer {
+      [User request processing]
+      [Appointment management]
+      [Emergency Services Integration]
+      [Blood donation notifications]
+      [Authentication and authorization]
+      [Notification management]
+      [External API integration (Google Maps, payment gateways)]
+      [AI-powered moderation system]
+  }
+
+  rectangle "Data Layer" as DataLayer {
+      [Data persistence and retrieval]
+      [User database]
+      [Doctor and donor profiles]
+      [System operation logs]
+  }
+
+  rectangle "Technologies Layer" as TechLayer {
+      [React.js]
+      [TailwindCSS]
+      [DaisyUI]
+      [Framer Motion]
+      [Node.js with Express.js]
+      [Socket.io]
+      [MongoDB]
+      [AWS S3 (or equivalent)]
+  }
+
+}
+
+package "System Components" {
+
+  component "API Gateway" as APIGateway {
+    "Manages communication between layers"
+  }
+
+  component "Authentication Service" as AuthService {
+    "User login and session management"
+  }
+
+  component "Notification System" as NotificationSystem {
+    "Manages email, SMS, in-app notifications"
+  }
+
+  component "Integration Layer" as IntegrationLayer {
+    "Interfaces with external services (e.g., pharmacies)"
+  }
+
+}
+
+' Connections between components with labels
+UILayer --> AppLayer : communicates via API calls
+AppLayer --> DataLayer : processes data requests and responses
+AppLayer --> APIGateway : routes requests to appropriate services
+APIGateway --> NotificationSystem : sends notifications to users
+AppLayer --> AuthService : handles user authentication
+AppLayer --> IntegrationLayer : interfaces with external services
+
+@enduml

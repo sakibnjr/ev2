@@ -1,0 +1,28 @@
+@startuml
+start
+
+:Start the NodeMCU;
+:Scan for nearby MAC addresses;
+if (MAC address found?) then (Yes)
+    :Send detected MAC addresses to the server;
+    if (Is MAC address valid?) then (Yes)
+        :Mark student as present in the database;
+        :Log the attendance with date and time;
+    else (No)
+        :Ignore the MAC address;
+    endif
+else (No)
+    :Continue scanning;
+endif
+
+:Verify attendance on the React frontend;
+if (Two-Factor/Additional Verification?) then (Yes)
+    :Fingerprint/OTP verified;
+    :Update attendance record in the database;
+else (No)
+    :Attendance verification incomplete;
+endif
+
+:Show attendance results on the React dashboard;
+stop
+@enduml

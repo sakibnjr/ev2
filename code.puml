@@ -1,0 +1,91 @@
+@startuml
+
+package "MediConnect Architecture" {
+
+  package "Presentation Layer" as Presentation {
+    folder "User Interface" as UI {
+      [Patients]
+      [Doctors]
+      [Donors]
+      [Admins]
+      [Health-related posts and tips]
+    }
+    folder "Technologies" as UITech {
+      [React.js]
+      [TailwindCSS]
+      [DaisyUI]
+      [Framer Motion]
+    }
+    folder "Components" as UIComponents {
+      [Smart search feature]
+      [Doctor profiles]
+      [Appointment booking interface]
+      [Blood donation request forms]
+      [Health Record Management]
+      [Pharmacy Integration]
+    }
+  }
+
+  package "Application Layer" as Application {
+    folder "Business Logic" as BusinessLogic {
+      [User request processing]
+      [Appointment management]
+      [Emergency Services Integration]
+      [Blood donation notifications]
+    }
+    folder "Technologies" as AppTech {
+      [Node.js with Express.js]
+      [Socket.io]
+    }
+    folder "Components" as AppComponents {
+      [Authentication and authorization]
+      [Notification management]
+      [External API integration (Google Maps, payment gateways)]
+      [AI-powered moderation system]
+    }
+  }
+
+  package "Data Layer" as Data {
+    folder "Data Management" as DataManagement {
+      [Data persistence and retrieval]
+    }
+    folder "Technologies" as DataTech {
+      [MongoDB]
+      [AWS S3 (or equivalent)]
+    }
+    folder "Components" as DataComponents {
+      [User database]
+      [Doctor and donor profiles]
+      [System operation logs]
+    }
+  }
+
+}
+
+package "System Components" {
+
+  component "API Gateway" as APIGateway {
+    "Manages communication between layers"
+  }
+
+  component "Authentication Service" as AuthService {
+    "User login and session management"
+  }
+
+  component "Notification System" as NotificationSystem {
+    "Manages email, SMS, in-app notifications"
+  }
+
+  component "Integration Layer" as IntegrationLayer {
+    "Interfaces with external services (e.g., pharmacies)"
+  }
+
+}
+
+Presentation --> Application : communicates via API calls
+Application --> Data : processes data requests and responses
+Application --> APIGateway : routes requests to appropriate services
+APIGateway --> NotificationSystem : sends notifications to users
+Application --> AuthService : handles user authentication
+
+@enduml
